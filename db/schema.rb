@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_09_230002) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_09_232708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "logo"
-    t.integer "goals_scored"
-    t.integer "goals_against"
-    t.integer "points"
+    t.integer "goals_scored", default: 0
+    t.integer "goals_against", default: 0
+    t.integer "points", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "games", force: :cascade do |t|
     t.date "date"
-    t.integer "home_score"
-    t.integer "away_score"
+    t.integer "home_score", default: 0
+    t.integer "away_score", default: 0
     t.bigint "matchday_id", null: false
     t.bigint "home_team_id", null: false
     t.bigint "away_team_id", null: false
