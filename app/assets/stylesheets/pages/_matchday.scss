@@ -1,0 +1,16 @@
+.matchday-container {
+  display: block;
+
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll;
+    white-space: nowrap;
+
+    .day {
+      width: 100%;
+      margin: 0 5vw;
+      text-align: center;
+    }
+  }
+}

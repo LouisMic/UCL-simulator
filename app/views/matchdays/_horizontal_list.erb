@@ -1,0 +1,6 @@
+<% matchdays.each_with_index do |matchday, index| %>
+  <div class="day">
+    <p>Matchday <%= index + 1 %></p>
+    <p><%= matchday.start_date %> - <%= matchday.end_date %></p>
+  </div>
+<% end %>
