@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
   resources :matchdays, only: [:index, :show] do
-    resources :predictions, only: [:create, :update]
-    resources :games, only: :show
+    patch :update_predictions, on: :member
+    resources :games, only: :show do
+      resources :predictions, only: [:edit, :update]
+    end
   end
+  resources :predictions, only: :create
 end

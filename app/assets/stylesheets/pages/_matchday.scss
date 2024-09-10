@@ -13,4 +13,27 @@
       text-align: center;
     }
   }
+
+  form {
+    display: block;
+    justify-content: space-evenly;
+
+    .home {
+      display: flex;
+      align-items: start;
+    }
+
+    .away {
+      display: flex;
+    }
+
+    label {
+      width: 100%;
+      flex-wrap: nowrap;
+    }
+
+    input {
+      width: 15vw;
+    }
+  }
 }
