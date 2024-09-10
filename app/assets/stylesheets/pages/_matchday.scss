@@ -11,29 +11,15 @@
       width: 100%;
       margin: 0 5vw;
       text-align: center;
-    }
-  }
 
-  form {
-    display: block;
-    justify-content: space-evenly;
-
-    .home {
-      display: flex;
-      align-items: start;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
 
-    .away {
-      display: flex;
-    }
-
-    label {
-      width: 100%;
-      flex-wrap: nowrap;
-    }
-
-    input {
-      width: 15vw;
+    .active {
+      font-weight: bold;
     }
   }
 }

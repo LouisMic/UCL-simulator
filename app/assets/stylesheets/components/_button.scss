@@ -1,0 +1,22 @@
+.btn {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100% !important;
+  margin: 10px 0;
+}
+
+.btn-predictions {
+  background-color: #f8f8f8ac;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.btn-rankings {
+  background-color: #62ff00;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}

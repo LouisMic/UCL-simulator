@@ -1,6 +1,7 @@
 <div class="container matchday-container">
   <div class="summary">
-    <%= render "horizontal_list", matchdays: @matchdays %>
+    <%= render "horizontal_list", matchdays: @matchdays, current_matchday: @matchday %>
   </div>
   <%= render "predictions", matchday: @matchday, games: @games %>
+  <%= button_to "Check out the rankings", clubs_path(), class: "btn btn-rankings", method: :get %>
 </div>

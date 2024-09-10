@@ -1,0 +1,32 @@
+<table class="tg">
+  <thead>
+    <tr>
+      <th class="tg-0lax">Pos</th>
+      <th class="tg-0lax">Team</th>
+      <th class="tg-0lax">GP</th>
+      <%# <th class="tg-0lax">V</th>
+      <th class="tg-0lax">D</th>
+      <th class="tg-0lax">L</th> %>
+      <th class="tg-0lax">Points</th>
+      <th class="tg-0lax">GS</th>
+      <th class="tg-0lax">GA</th>
+      <th class="tg-0lax">GD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% clubs.each_with_index do |club, index| %>
+      <tr class=<%= if index <= 7 then "quali" elsif index > 23 then "eliminated" else "playin" end %>>
+        <td class="tg-0lax"><%= index + 1 %></td>
+        <td class="tg-0lax"><%= club.name %></td>
+        <td class="tg-0lax"><%= club.games.size %></td>
+        <%# <td class="tg-0lax">0</td>
+        <td class="tg-0lax">1</td>
+        <td class="tg-0lax">0</td> %>
+        <td class="tg-0lax"><%= club.points %></td>
+        <td class="tg-0lax"><%= club.goals_scored %></td>
+        <td class="tg-0lax"><%= club.goals_against %></td>
+        <td class="tg-0lax"><%= club.goals_scored - club.goals_against %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
