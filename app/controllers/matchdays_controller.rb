@@ -1,5 +1,5 @@
 class MatchdaysController < ApplicationController
-  before_action :gather_predictions
+  before_action :gather_predictions, only: [:index]
   def index
     @matchdays = Matchday.all
     @matchday = Matchday.next
@@ -7,6 +7,7 @@ class MatchdaysController < ApplicationController
   end
 
   def show
+    @matchdays = Matchday.all
     @matchday = Matchday.find(params[:id])
     @games = @matchday.games
   end
@@ -19,6 +20,8 @@ class MatchdaysController < ApplicationController
       game = Game.find(game_id.to_i)
       prediction = game.prediction(current_user)
       prediction.update(game_params.permit(:home_score, :away_score))
+      game.home_team.update_points(current_user)
+      game.away_team.update_points(current_user)
     end
     redirect_to @matchday, notice: 'Prédictions mises à jour avec succès'
   end
