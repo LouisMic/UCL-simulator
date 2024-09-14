@@ -1,14 +1,14 @@
 <div class="bg-uclblue px-4 py-5 flex items-center justify-between rounded-lg">
   <%= f.simple_fields_for game.id.to_s, prediction do |ff| %>
     <div class="flex flex-col-reverse items-center justify-center">
-      <%= image_tag "https://upload.wikimedia.org/wikipedia/fr/4/43/Logo_Olympique_de_Marseille.svg", width: 50 %>
+      <%= image_tag game.home_team.logo, width: 50 %>
       <%= ff.label :home_score, game.home_team.name, class: "pb-3" %>
     </div>
     <%= ff.input :home_score, label: false, input_html: { class: "bg-uclbluedark text-white border-uclbluelight rounded-lg" } %>
 
     <%= ff.input :away_score, label: false, input_html: { class: "bg-uclbluedark text-white border-uclbluelight rounded-lg" } %>
     <div class="flex flex-col-reverse items-center justify-center">
-      <%= image_tag "https://upload.wikimedia.org/wikipedia/fr/7/76/Logo_des_Girondins_de_Bordeaux.svg", width: 50 %>
+      <%= image_tag game.away_team.logo, width: 50 %>
       <%= ff.label :away_score, game.away_team.name, class: "pb-3"  %>
     </div>
   <% end %>
