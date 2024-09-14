@@ -1,5 +1,8 @@
 class MatchdaysController < ApplicationController
+  include MatchdaysHelper
+
   def show
+    @clubs = Club.rankings
     @matchdays = Matchday.all
     @matchday = Matchday.find(params[:id])
     @games = @matchday.games

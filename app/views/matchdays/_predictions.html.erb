@@ -1,10 +1,5 @@
-<%= simple_form_for matchday, url: update_predictions_matchday_path(matchday), method: :patch do |f| %>
-
-  <div class="grid grid-cols-3 gap-5">
-    <% games.each do |game| %>
-        <%= render 'game', game: game, prediction: game.prediction(current_user), f: f %>
-    <% end %>
-  </div>
-  <%= f.submit "Make your picks for matchday #{matchday.round}", class: "btn btn-predictions" %>
-
-<% end %>
+<div class="grid grid-cols-2 gap-4">
+  <% games.each do |game| %>
+    <%= render 'game', game: game, prediction: game.prediction(current_user), f: f %>
+  <% end %>
+</div>
