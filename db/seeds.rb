@@ -89,4 +89,4 @@ require 'json'
 #   Club.find_by(name: name).update!(logo: logo)
 # end
 
-Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+# Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
