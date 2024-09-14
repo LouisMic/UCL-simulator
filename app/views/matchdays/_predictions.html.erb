@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-2 gap-4" data-controller="update-rankings">
   <% games.each do |game| %>
     <%= render 'game', game: game, prediction: game.prediction(current_user), f: f %>
   <% end %>
