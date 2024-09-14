@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @matchday = Matchday.next
+    @user = current_user
   end
 end

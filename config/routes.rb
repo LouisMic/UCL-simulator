@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       resources :predictions, only: [:edit, :update]
     end
   end
+  resources :users, only: :show do
+    patch :algo, on: :member
+  end
   resources :predictions, only: :create
   resources :clubs, only: :index
 end

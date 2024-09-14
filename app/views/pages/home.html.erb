@@ -1,5 +1,12 @@
 <div>
   <h1>Make your predictions for the group phase of the 2024 UEFA Champions League</h1>
   <p>Your club has a tough draw and you wonder if they can make it to the next phase of the UEFA Champions League? Make your own predictions and check out which teams will come out on top of the league phase and qualify directly for the round of 16, which teams will have to go through the play-in game and who will be eliminated from the 2024-2025 Champions League</p>
-  <%= link_to "Make your picks", matchday_path(@matchday) %>
+  <% if @user %>
+    <%= link_to "Predict all games", matchday_path(@matchday) %>
+    <%= form_with url: algo_user_path(@user), method: :patch, local: true do %>
+      <%= submit_tag "Simulate all games" %>
+    <% end %>
+  <% else %>
+    <%= link_to "Sign in to predict all games", new_user_session_path %>
+  <% end %>
 </div>
