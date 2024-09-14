@@ -1,6 +1,4 @@
 .matchday-container {
-  display: block;
-
   .summary {
     display: flex;
     justify-content: space-between;
@@ -12,10 +10,6 @@
       margin: 0 5vw;
       text-align: center;
 
-      a {
-        text-decoration: none;
-        color: white;
-      }
     }
 
     .active {

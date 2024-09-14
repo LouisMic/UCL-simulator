@@ -1,0 +1,28 @@
+<div>
+  <table class="text-sm text-left">
+    <thead>
+      <tr>
+        <th scope="col" class="px-2 py-1">Pos</th>
+        <th scope="col" class="px-2 py-1">Team</th>
+        <th scope="col" class="px-2 py-1">GP</th>
+        <th scope="col" class="px-2 py-1">Points</th>
+        <th scope="col" class="px-2 py-1">GS</th>
+        <th scope="col" class="px-2 py-1">GA</th>
+        <th scope="col" class="px-2 py-1">GD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% clubs.each_with_index do |club, index| %>
+        <tr class="border-b <%= ranking_color(index) %>">
+          <td class="px-2 py-1"><%= index + 1 %></td>
+          <td class="px-2 py-1"><%= club.name %></td>
+          <td class="px-2 py-1"><%= club.games.size %></td>
+          <td class="px-2 py-1"><%= club.points %></td>
+          <td class="px-2 py-1"><%= club.goals_scored %></td>
+          <td class="px-2 py-1"><%= club.goals_against %></td>
+          <td class="px-2 py-1"><%= club.goals_scored - club.goals_against %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
