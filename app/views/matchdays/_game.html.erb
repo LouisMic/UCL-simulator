@@ -1,0 +1,4 @@
+<%= input.fields_for game.id.to_s, prediction do |prediction_form| %>
+  <%= prediction_form.input :home_score, label: game.home_team.name, wrapper_html: { class: "col-6 home"} %>
+  <%= prediction_form.input :away_score, label: game.away_team.name, wrapper_html: { class: "col-6 away"}  %>
+<% end %>
