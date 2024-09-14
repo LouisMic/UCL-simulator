@@ -8,12 +8,12 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}'
   ],
   theme: {
-    colors: {
-      uclblue: '#0a0a61',
-      uclbluelight: "#05edff",
-      uclbluedark: '#010141'
-    },
     extend: {
+      colors: {
+        uclblue: '#0a0a61',
+        uclbluelight: "#05edff",
+        uclbluedark: '#010141'
+      },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
