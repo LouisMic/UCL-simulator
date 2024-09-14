@@ -22,7 +22,7 @@ require 'json'
 # Game.destroy_all
 # Club.destroy_all
 
-## Creating all clubs and fixtures
+# # Creating all clubs and fixtures
 # page1 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=1"
 # page2 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=2"
 # page3 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=3"
@@ -87,6 +87,22 @@ require 'json'
 
 # clubs.each do |name, logo|
 #   Club.find_by(name: name).update!(logo: logo)
+# end
+
+# Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
+
+# all_urls.each do |url|
+#   response = RestClient.get(url)
+#   fixtures = JSON.parse(response)["data"]["fixtures"]
+
+#   fixtures.each do |fixture|
+#     home = Club.find_by(name: fixture["home_name"] || fixture["home_name"])
+#     away = Club.find_by(name: fixture["away_name"])
+#     game = Game.find_by(home_team: home, away_team: away)
+#     time = "#{fixture["date"]} #{fixture["time"]}"
+#     date = DateTime.parse(time)
+#     game.update!(gametime: date)
+#   end
 # end
 
 # Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
