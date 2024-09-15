@@ -12,4 +12,16 @@ class Game < ApplicationRecord
   def name
     "#{home_team.name} - #{away_team.name}"
   end
+
+  def date
+    day_of_week = gametime.wday
+    day_names = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
+    day_name = day_names[day_of_week]
+
+    "#{day_name}, #{gametime.strftime("%d %b %Y")}"
+  end
+
+  def hour
+    gametime.in_time_zone("Paris").strftime("%H:%M")
+  end
 end

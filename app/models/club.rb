@@ -37,6 +37,6 @@ class Club < ApplicationRecord
   end
 
   def self.rankings
-    Club.all.sort_by { |club| [club.points, club.goals_scored - club.goals_against] }.reverse
+    Club.includes(:home_games, :away_games).all.sort_by { |club| [club.points, club.goals_scored - club.goals_against] }.reverse
   end
 end

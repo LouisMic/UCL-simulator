@@ -5,12 +5,13 @@
 
   <div class="grid grid-cols-3 gap-5">
     <div class="col-span-2">
-      <%= simple_form_for @matchday, url: update_predictions_matchday_path(@matchday), method: :patch do |f| %>
+      <%= simple_form_for @matchday, url: update_predictions_matchday_path(@matchday), method: :patch, remote: true do |f| %>
         <%= render "predictions", matchday: @matchday, games: @games, f:f %>
-        <%= f.submit "Make your picks for matchday #{@matchday.round}", class: "btn btn-predictions" %>
       <% end %>
     </div>
 
-    <%= render "table", clubs: @clubs %>
+    <div class="table-container">
+      <%= render "table", clubs: @clubs %>
+    </div>
   </div>
 </div>
