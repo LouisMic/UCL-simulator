@@ -1,11 +1,3 @@
-<%# <% matchdays.each_with_index do |matchday, index| %>
-<%#   <div class="day <%= "active" if matchday == current_matchday %><%# ">
-<%#     <a href="<%= matchday_path(matchday) %><%# ">
-<%#       <p>Matchday <%= index + 1 %><%# </p>
-<%#       <p><%= matchday.start_date %><%#  - <%= matchday.end_date %><%# </p>
-<%#     </a>
-<%#   </div>
-<% end %>
 <ul class="flex -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
   <% matchdays.each_with_index do |matchday, index| %>
     <li class="me-2" role="presentation">
