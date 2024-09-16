@@ -39,70 +39,251 @@ require 'json'
 #     home = Club.find_or_create_by(name: fixture["home_name"])
 #     away = Club.find_or_create_by(name: fixture["away_name"])
 #     matchday = Matchday.all[fixture["round"].to_i - 1]
-#     Game.create!(matchday: matchday, home_team: home, away_team: away)
+#     time = "#{fixture["date"]} #{fixture["time"]}"
+#     date = DateTime.parse(time)
+#     Game.create!(matchday: matchday, home_team: home, away_team: away, gametime: date)
 #   end
 # end
 
 # puts "Created #{Club.all.size} clubs (should be 36)"
 # puts "Created #{Game.all.size} games (should be #{18 * 8})"
 
+## Updating clubs with logos countries and coeffs
+
 # clubs = {
-#   "Arsenal" => "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
-#   "Barcelona" => "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
-#   "Bayer Leverkusen" => "https://upload.wikimedia.org/wikipedia/en/5/59/Bayer_04_Leverkusen_logo.svg",
-#   "Juventus" => "https://upload.wikimedia.org/wikipedia/commons/4/4e/Juventus_FC_-_logo_black_%28Italy%2C_2017%29.svg",
-#   "Inter" => "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
-#   "Liverpool" => "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
-#   "Manchester City" => "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
-#   "PSV Eindhoven" => "https://upload.wikimedia.org/wikipedia/en/0/05/PSV_Eindhoven.svg",
-#   "RasenBallsport Leipzig" => "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig_2014_logo.svg",
-#   "Real Madrid" => "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
-#   "Shakhtar Donetsk" => "https://upload.wikimedia.org/wikipedia/fr/5/57/FC_Shakhtar_Donetsk_%28logo%29.svg",
-#   "Slovan Bratislava" => "https://upload.wikimedia.org/wikipedia/commons/0/01/SK_Slovan_Bratislava_logo.svg",
-#   "Young Boys" => "https://upload.wikimedia.org/wikipedia/fr/c/c2/BSC_Young_Boys.svg",
-#   "AC Milan" => "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
-#   "Aston Villa" => "https://upload.wikimedia.org/wikipedia/fr/1/14/Aston_Villa_FC_2024.svg",
-#   "Atalanta" => "https://upload.wikimedia.org/wikipedia/fr/f/fd/Logo_Atalanta_Bergame_2024.svg",
-#   "Atletico Madrid" => "https://upload.wikimedia.org/wikipedia/fr/f/fc/Logo_ATM_2024.svg",
-#   "Bayern Munich" => "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
-#   "Benfica" => "https://upload.wikimedia.org/wikipedia/fr/1/1c/Logo_SLB_2023.svg",
-#   "Bologna" => "https://upload.wikimedia.org/wikipedia/fr/f/fb/Logo_Bologna_FC_-_2018.svg",
-#   "Borussia Dortmund" => "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg",
-#   "Brest" => "https://upload.wikimedia.org/wikipedia/fr/4/4c/Logo_SB29_2010.svg",
-#   "Club Brugge" => "https://upload.wikimedia.org/wikipedia/fr/f/fd/Club_Brugge_KV.svg",
-#   "Celtic" => "https://upload.wikimedia.org/wikipedia/fr/f/f2/Celtic_fc.svg",
-#   "Dinamo Zagreb" => "https://upload.wikimedia.org/wikipedia/fr/b/b2/GNK_Dinamo_Zagreb_Crest.png",
-#   "FK Crvena Zvezda" => "https://upload.wikimedia.org/wikipedia/commons/0/07/Grb-fk-crvena-zvezda.svg",
-#   "Feyenoord" => "https://upload.wikimedia.org/wikipedia/fr/2/24/Logo_Feyenoord_Rotterdam.svg",
-#   "Girona" => "https://upload.wikimedia.org/wikipedia/fr/5/56/Logo_Girona_FC_-_2022.svg",
-#   "Lille" => "https://upload.wikimedia.org/wikipedia/fr/6/62/Logo_LOSC_Lille_2018.svg",
-#   "Monaco" => "https://upload.wikimedia.org/wikipedia/fr/1/1d/Logo_AS_Monaco_FC_2021.svg",
-#   "Paris Saint Germain" => "https://upload.wikimedia.org/wikipedia/fr/8/86/Paris_Saint-Germain_Logo.svg",
-#   "Salzburg" => "https://upload.wikimedia.org/wikipedia/fr/b/be/Red_Bull_Salzburg_logo.svg",
-#   "Sparta Prague" => "https://upload.wikimedia.org/wikipedia/commons/d/dd/AC-Sparta-LOGO2021.svg",
-#   "Sporting CP" => "https://upload.wikimedia.org/wikipedia/fr/1/12/Logo_Sporting_Clube_Portugal.svg",
-#   "Sturm Graz" => "https://upload.wikimedia.org/wikipedia/fr/2/20/SK_Sturm_Graz_Logo.svg",
-#   "VfB Stuttgart" => "https://upload.wikimedia.org/wikipedia/commons/e/eb/VfB_Stuttgart_1893_Logo.svg",
-# }
+#   "Arsenal" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+#     country: "England",
+#     coeff_full: 62,
+#     coeff_last: 22
+#   },
+#   "Barcelona" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+#     country: "Spain",
+#     coeff_full: 67,
+#     coeff_last: 23
+#   },
+#   "Bayer Leverkusen" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/5/59/Bayer_04_Leverkusen_logo.svg",
+#     country: "Germany",
+#     coeff_full: 72,
+#     coeff_last: 29
+#   },
+#   "Juventus" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Juventus_FC_-_logo_black_%28Italy%2C_2017%29.svg",
+#     country: "Italy",
+#     coeff_full: 58,
+#     coeff_last: 0
+#   },
+#   "Inter" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
+#     country: "Italy",
+#     coeff_full: 76,
+#     coeff_last: 20
+#   },
+#   "Liverpool" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+#     country: "England",
+#     coeff_full: 96,
+#     coeff_last: 20
+#   },
+#   "Manchester City" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+#     country: "England",
+#     coeff_full: 123,
+#     coeff_last: 28
+#   },
+#   "PSV Eindhoven" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/0/05/PSV_Eindhoven.svg",
+#     country: "Netherlands",
+#     coeff_full: 48,
+#     coeff_last: 17
+#   },
+#   "RasenBallsport Leipzig" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig_2014_logo.svg",
+#     country: "Germany",
+#     coeff_full: 70,
+#     coeff_last: 18
+#   },
+#   "Real Madrid" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+#     country: "Spain",
+#     coeff_full: 119,
+#     coeff_last: 34
+#   },
+#   "Shakhtar Donetsk" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/5/57/FC_Shakhtar_Donetsk_%28logo%29.svg",
+#     country: "Ukraine",
+#     coeff_full: 41,
+#     coeff_last: 10
+#   },
+#   "Slovan Bratislava" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/0/01/SK_Slovan_Bratislava_logo.svg",
+#     country: "Slovakia",
+#     coeff_full: 27.5,
+#     coeff_last: 8
+#   },
+#   "Young Boys" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/c/c2/BSC_Young_Boys.svg",
+#     country: "Switzerland",
+#     coeff_full: 28.5,
+#     coeff_last: 7
+#   },
+#   "AC Milan" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
+#     country: "Italy",
+#     coeff_full: 59,
+#     coeff_last: 16
+#   },
+#   "Aston Villa" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/1/14/Aston_Villa_FC_2024.svg",
+#     country: "England",
+#     coeff_full: 17,
+#     coeff_last: 17
+#   },
+#   "Atalanta" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/f/fd/Logo_Atalanta_Bergame_2024.svg",
+#     country: "Italy",
+#     coeff_full: 61,
+#     coeff_last: 28
+#   },
+#   "Atletico Madrid" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/f/fc/Logo_ATM_2024.svg",
+#     country: "Spain",
+#     coeff_full: 67,
+#     coeff_last: 24
+#   },
+#   "Bayern Munich" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
+#     country: "Germany",
+#     coeff_full: 108,
+#     coeff_last: 28
+#   },
+#   "Benfica" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/1/1c/Logo_SLB_2023.svg",
+#     country: "Portugal",
+#     coeff_full: 69,
+#     coeff_last: 14
+#   },
+#   "Bologna" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/f/fb/Logo_Bologna_FC_-_2018.svg",
+#     country: "Italy",
+#     coeff_full: 0,
+#     coeff_last: 0
+#   },
+#   "Borussia Dortmund" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg",
+#     country: "Germany",
+#     coeff_full: 79,
+#     coeff_last: 29
+#   },
+#   "Brest" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/4/4c/Logo_SB29_2010.svg",
+#     country: "France",
+#     coeff_full: 0,
+#     coeff_last: 0
+#   },
+#   "Club Brugge" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/f/fd/Club_Brugge_KV.svg",
+#     country: "Belgium",
+#     coeff_full: 56,
+#     coeff_last: 21
+#   },
+#   "Celtic" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/f/f2/Celtic_fc.svg",
+#     country: "Scotland",
+#     coeff_full: 22,
+#     coeff_last: 7
+#   },
+#   "Dinamo Zagreb" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/b/b2/GNK_Dinamo_Zagreb_Crest.png",
+#     country: "Croatia",
+#     coeff_full: 42,
+#     coeff_last: 9
+#   },
+#   "FK Crvena Zvezda" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/0/07/Grb-fk-crvena-zvezda.svg",
+#     country: "Serbia",
+#     coeff_full: 34,
+#     coeff_last: 5
+#   },
+#   "Feyenoord" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/2/24/Logo_Feyenoord_Rotterdam.svg",
+#     country: "Netherlands",
+#     coeff_full: 53,
+#     coeff_last: 8
+#   },
+#   "Girona" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/5/56/Logo_Girona_FC_-_2022.svg",
+#     country: "Spain",
+#     coeff_full: 0,
+#     coeff_last: 0
+#   },
+#   "Lille" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/6/62/Logo_LOSC_Lille_2018.svg",
+#     country: "France",
+#     coeff_full: 42,
+#     coeff_last: 17
+#   },
+#   "Monaco" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/1/1d/Logo_AS_Monaco_FC_2021.svg",
+#     country: "France",
+#     coeff_full: 24,
+#     coeff_last: 0
+#   },
+#   "Paris Saint Germain" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/8/86/Paris_Saint-Germain_Logo.svg",
+#     country: "France",
+#     coeff_full: 85,
+#     coeff_last: 23
+#   },
+#   "Salzburg" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/b/be/Red_Bull_Salzburg_logo.svg",
+#     country: "Austria",
+#     coeff_full: 40,
+#     coeff_last: 7
+#   },
+#   "Sparta Prague" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/d/dd/AC-Sparta-LOGO2021.svg",
+#     country: "Czech Republic",
+#     coeff_full: 20.5,
+#     coeff_last: 10
+#   },
+#   "Sporting CP" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/1/12/Logo_Sporting_Clube_Portugal.svg",
+#     country: "Portugal",
+#     coeff_full: 44.5,
+#     coeff_last: 12
+#   },
+#   "Sturm Graz" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/fr/2/20/SK_Sturm_Graz_Logo.svg",
+#     country: "Austria",
+#     coeff_full: 13,
+#     coeff_last: 4
+#   },
+#   "VfB Stuttgart" =>
+#   { logo: "https://upload.wikimedia.org/wikipedia/commons/e/eb/VfB_Stuttgart_1893_Logo.svg",
+#     country: "Germany",
+#     coeff_full: 0,
+#     coeff_last: 0
+#   },
+#  }
 
-# clubs.each do |name, logo|
-#   Club.find_by(name: name).update!(logo: logo)
+# clubs.each do |key, value|
+#   Club.find_by(name: key).update!(logo: value[:logo], country: value[:country], coeff_full: value[:coeff_full], coeff_last: value[:coeff_last])
+# end
+#
+#
+## Updating RB Leipzig
+
+# if Club.find_by(name: "RasenBallsport Leipzig")
+#   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+# else
+#   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
 # end
 
-# Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
-
-# all_urls.each do |url|
-#   response = RestClient.get(url)
-#   fixtures = JSON.parse(response)["data"]["fixtures"]
-
-#   fixtures.each do |fixture|
-#     home = Club.find_by(name: fixture["home_name"] || fixture["home_name"])
-#     away = Club.find_by(name: fixture["away_name"])
-#     game = Game.find_by(home_team: home, away_team: away)
-#     time = "#{fixture["date"]} #{fixture["time"]}"
-#     date = DateTime.parse(time)
-#     game.update!(gametime: date)
-#   end
+#  Updating clubs with coefficients -> to delete after pushing
+# clubs.each do |key, value|
+#   Club.find_by(name: key).update!(country: value[:country], coeff_full: value[:coeff_full], coeff_last: value[:coeff_last])
 # end
-
-# Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+#
