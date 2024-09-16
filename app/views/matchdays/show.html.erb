@@ -13,7 +13,7 @@
           aria-labelledby="matchday<%= matchday.id %>-tab"
         >
           <%= simple_form_for matchday, url: update_predictions_matchday_path(matchday), method: :patch, remote: true do |f| %>
-            <%= render "predictions", matchday: matchday, games: matchday.games, f:f %>
+            <%= render "predictions", matchday: matchday, games: matchday.games.order(:gametime), f:f %>
           <% end %>
         </div>
       <% end %>
