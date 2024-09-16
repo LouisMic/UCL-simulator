@@ -3,8 +3,8 @@
     <%= render "horizontal_list", matchdays: @matchdays, current_matchday: @matchday %>
   </div>
 
-  <div class="grid grid-cols-3 gap-5">
-    <div class="col-span-2">
+  <div class="md:grid md:grid-cols-3 gap-5">
+    <div class="md:col-span-2">
       <%= simple_form_for @matchday, url: update_predictions_matchday_path(@matchday), method: :patch, remote: true do |f| %>
         <%= render "predictions", matchday: @matchday, games: @games, f:f %>
       <% end %>
