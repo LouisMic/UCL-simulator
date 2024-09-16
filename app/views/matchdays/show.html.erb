@@ -3,8 +3,8 @@
     <%= render "horizontal_list", matchdays: @matchdays %>
   </div>
 
-  <div class="grid grid-cols-3 gap-5">
-    <div class="col-span-2">
+  <div class="md:grid md:grid-cols-3 gap-5">
+    <div class="md:col-span-2">
       <% @matchdays.each do |matchday| %>
         <div
           class="<%= "hidden" unless matchday == Matchday.next %>"
