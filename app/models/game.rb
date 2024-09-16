@@ -17,8 +17,8 @@ class Game < ApplicationRecord
     day_of_week = gametime.wday
     day_names = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     day_name = day_names[day_of_week]
-
-    "#{day_name}, #{gametime.strftime("%d %b %Y")}"
+    day_name
+    # "#{day_name}, #{gametime.strftime("%d %b %Y")}"
   end
 
   def hour
