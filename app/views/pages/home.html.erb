@@ -1,12 +1,22 @@
-<div>
-  <h1>Make your predictions for the group phase of the 2024 UEFA Champions League</h1>
-  <p>Your club has a tough draw and you wonder if they can make it to the next phase of the UEFA Champions League? Make your own predictions and check out which teams will come out on top of the league phase and qualify directly for the round of 16, which teams will have to go through the play-in game and who will be eliminated from the 2024-2025 Champions League</p>
-  <% if @user %>
-    <%= link_to "Predict all games", matchday_path(@matchday) %>
-    <%= form_with url: algo_user_path(@user), method: :patch, local: true do %>
-      <%= submit_tag "Simulate all games" %>
+<div class="max-w-screen-xl mx-5">
+  <div class="buttons flex justify-center mt-10 mb-20 text-center">
+    <% if @user %>
+      <div class="homebutton px-5 py-3 text-base font-medium text-center inline-flex items-center justify-center w-full sm:w-auto text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2">
+        <i class="fas fa-search mr-2"></i>
+        <%= link_to "Predict all games", matchday_path(@matchday), class: "w-full text-center" %>
+      </div>
+      <div class="homebutton px-5 py-3 text-base font-medium text-center inline-flex items-center justify-center w-full sm:w-auto text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-2">
+        <i class="fa-solid fa-forward-fast mr-2"></i>
+        <%= form_with url: algo_user_path(@user), method: :patch, local: true, class: "w-full text-center" do %>
+          <%= submit_tag "Simulate all games", class: "cursor-pointer" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="homebutton px-5 py-3 text-base font-medium text-center inline-flex items-center justify-center w-full sm:w-auto text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <%= link_to "Sign in to predict all games", new_user_session_path %>
+      </div>
     <% end %>
-  <% else %>
-    <%= link_to "Sign in to predict all games", new_user_session_path %>
-  <% end %>
+  </div>
+  <p class="text-center my-5 text-xl font-semibold underline my-10">Make your predictions for the group phase of the 2024 UEFA Champions League</h1>
+  <p class ="text-justify">Your club has a tough draw and you wonder if they can make it to the next phase of the UEFA Champions League? Make your own predictions and check out which teams will come out on top of the league phase and qualify directly for the round of 16, which teams will have to go through the play-in game and who will be eliminated from the 2024-2025 Champions League. Or let our algorythm do the trick and see (and modify if you're unhappy) the results!</p>
 </div>
