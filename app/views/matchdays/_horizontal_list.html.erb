@@ -11,10 +11,10 @@
         aria-controls="matchday<%= matchday.id %>"
         aria-selected="false"
       >
-        <a href="<%= matchday_path(matchday) %>">
+        <div>
           <p>Matchday <%= index + 1 %></p>
           <p><%= matchday.start_date %> - <%= matchday.end_date %></p>
-        </a>
+        </div>
       </button>
     </li>
   <% end %>

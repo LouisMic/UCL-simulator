@@ -274,16 +274,10 @@ require 'json'
 # end
 #
 #
-## Updating RB Leipzig
+# # Updating RB Leipzig
 
 # if Club.find_by(name: "RasenBallsport Leipzig")
 #   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
 # else
 #   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
 # end
-
-#  Updating clubs with coefficients -> to delete after pushing
-# clubs.each do |key, value|
-#   Club.find_by(name: key).update!(country: value[:country], coeff_full: value[:coeff_full], coeff_last: value[:coeff_last])
-# end
-#

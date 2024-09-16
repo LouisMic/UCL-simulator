@@ -9,6 +9,7 @@ export default class extends Controller {
     event.currentTarget.setAttribute('aria-selected', 'true')
     event.currentTarget.classList.add('italic')
     const matchday = event.currentTarget.getAttribute('aria-controls')
+    console.log(document.getElementById(matchday))
     document.getElementById(matchday).classList.remove('hidden')
   }
 
