@@ -1,12 +1,21 @@
-<div class="container matchday-container">
-  <div class="summary mb-5">
-    <%= render "horizontal_list", matchdays: @matchdays, current_matchday: @matchday %>
+<div class="container matchday-container" data-controller="tabs">
+  <div class="summary mb-4 border-b">
+    <%= render "horizontal_list", matchdays: @matchdays %>
   </div>
 
   <div class="grid grid-cols-3 gap-5">
     <div class="col-span-2">
-      <%= simple_form_for @matchday, url: update_predictions_matchday_path(@matchday), method: :patch, remote: true do |f| %>
-        <%= render "predictions", matchday: @matchday, games: @games, f:f %>
+      <% @matchdays.each do |matchday| %>
+        <div
+          class="<%= "hidden" unless matchday == Matchday.next %>"
+          id="matchday<%= matchday.id %>"
+          role="tabpanel"
+          aria-labelledby="matchday<%= matchday.id %>-tab"
+        >
+          <%= simple_form_for matchday, url: update_predictions_matchday_path(matchday), method: :patch, remote: true do |f| %>
+            <%= render "predictions", matchday: matchday, games: matchday.games, f:f %>
+          <% end %>
+        </div>
       <% end %>
     </div>
 
@@ -14,4 +23,9 @@
       <%= render "table", clubs: @clubs %>
     </div>
   </div>
+</div>
+
+
+
+<div class="">
 </div>
