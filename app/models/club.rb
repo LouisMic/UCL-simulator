@@ -6,6 +6,25 @@ class Club < ApplicationRecord
   validates :goals_against, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :name, presence: true
 
+  COUNTRIES = {
+    "England" => 5,
+    "Spain" => 5,
+    "Germany" => 5,
+    "Italy" => 5,
+    "France" => 4,
+    "Netherlands" => 4,
+    "Portugal" => 4,
+    "Ukraine" => 3,
+    "Belgium" => 3,
+    "Austria" => 3,
+    "Scotland" => 2,
+    "Serbia" => 2,
+    "Czech Republic" => 2,
+    "Slovakia" => 1,
+    "Switzerland" => 1,
+    "Croatia" => 1,
+  }
+
   def games
     Game.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
   end

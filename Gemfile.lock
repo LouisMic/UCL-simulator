@@ -67,6 +67,8 @@ GEM
       activemodel (= 7.1.4)
       activesupport (= 7.1.4)
       timeout (>= 0.4.0)
+    activerecord-import (1.8.1)
+      activerecord (>= 4.2)
     activestorage (7.1.4)
       actionpack (= 7.1.4)
       activejob (= 7.1.4)
@@ -324,6 +326,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-import
   autoprefixer-rails
   bootsnap
   capybara
