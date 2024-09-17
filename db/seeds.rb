@@ -1,6 +1,11 @@
 require 'rest-client'
 require 'json'
 
+# Destroying all clubs and fixtures
+
+Game.destroy_all
+Matchday.destroy_all
+Club.destroy_all
 
 # Creating Matchdays
 
@@ -15,12 +20,6 @@ Matchday.create!(start_date: "2025-01-29", end_date: "2025-01-29")
 
 puts "Created #{Matchday.all.size} matchdays (should be 8)"
 
-
-
-# Destroying all clubs and fixtures
-
-Game.destroy_all
-Club.destroy_all
 
 # Creating all clubs and fixtures
 page1 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=1"
@@ -276,8 +275,8 @@ end
 
 # Updating RB Leipzig
 
-if Club.find_by(name: "RasenBallsport Leipzig")
-  Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
-else
-  Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
-end
+# if Club.find_by(name: "RasenBallsport Leipzig")
+#   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+# else
+#   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
+# end
