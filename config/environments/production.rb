@@ -88,7 +88,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Allow assets that aren't found to fall back to the filesystem.
-  config.assets.unknown_asset_fallback = true
+  config.assets.unknown_asset_fallback = false
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
