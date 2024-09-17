@@ -273,10 +273,32 @@ require 'json'
 # end
 
 
-# Updating RB Leipzig
+# # Updating RB Leipzig
 
-if Club.find_by(name: "RasenBallsport Leipzig")
-  Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
-else
-  Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
-end
+# if Club.find_by(name: "RasenBallsport Leipzig")
+#   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+# else
+#   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
+# end
+
+# Updating Day 1
+
+Game.find(4).update!(home_score: 3, away_score: 1)
+Game.find(5).update!(home_score: 0, away_score: 3)
+Game.find(6).update!(home_score: 9, away_score: 2)
+Game.find(7).update!(home_score: 1, away_score: 3)
+Game.find(8).update!(home_score: 2, away_score: 0)
+Game.find(9).update!(home_score: 3, away_score: 1)
+# Game.find(10).update!(home_score: 1, away_score: 1)
+# Game.find(11).update!(home_score: 1, away_score: 1)
+# Game.find(12).update!(home_score: 1, away_score: 1)
+# Game.find(13).update!(home_score: 1, away_score: 1)
+# Game.find(14).update!(home_score: 1, away_score: 1)
+# Game.find(15).update!(home_score: 1, away_score: 1)
+# Game.find(16).update!(home_score: 1, away_score: 1)
+# Game.find(17).update!(home_score: 1, away_score: 1)
+# Game.find(18).update!(home_score: 1, away_score: 1)
+# Game.find(19).update!(home_score: 1, away_score: 1)
+# Game.find(20).update!(home_score: 1, away_score: 1)
+# Game.find(21).update!(home_score: 1, away_score: 1)
+# Game.find(22).update!(home_score: 1, away_score: 1)
