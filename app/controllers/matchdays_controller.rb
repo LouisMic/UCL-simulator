@@ -5,7 +5,7 @@ class MatchdaysController < ApplicationController
     @clubs = Club.select(:id, :name, :points, :goals_against, :goals_scored).rankings
     @matchdays = Matchday.all
     @matchday = Matchday.find(params[:id])
-    @games = @matchday.games.order(:gametime)
+    @games = @matchday.games.includes(:home_team, :away_team).order(:gametime)
   end
 
   def update_predictions
