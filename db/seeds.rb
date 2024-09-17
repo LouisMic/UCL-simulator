@@ -275,8 +275,8 @@ require 'json'
 
 # Updating RB Leipzig
 
-# if Club.find_by(name: "RasenBallsport Leipzig")
-#   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
-# else
-#   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
-# end
+if Club.find_by(name: "RasenBallsport Leipzig")
+  Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
+else
+  Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
+end
