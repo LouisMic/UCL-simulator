@@ -2,13 +2,11 @@ require 'rest-client'
 require 'json'
 
 # # Destroying all clubs and fixtures
-
 # Game.destroy_all
 # Matchday.destroy_all
 # Club.destroy_all
 
 # # Creating Matchdays
-
 # Matchday.create!(start_date: "2024-09-17", end_date: "2024-09-19")
 # Matchday.create!(start_date: "2024-10-01", end_date: "2024-10-02")
 # Matchday.create!(start_date: "2024-10-22", end_date: "2024-10-23")
@@ -48,7 +46,6 @@ require 'json'
 # puts "Created #{Game.all.size} games (should be #{18 * 8})"
 
 # # Updating clubs with logos countries and coeffs
-
 # clubs = {
 #   "Arsenal" =>
 #   { logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
@@ -267,38 +264,86 @@ require 'json'
 #     coeff_last: 0
 #   },
 #  }
-
 # clubs.each do |key, value|
 #   Club.find_by(name: key).update!(logo: value[:logo], country: value[:country], coeff_full: value[:coeff_full], coeff_last: value[:coeff_last])
 # end
 
 
 # # Updating RB Leipzig
-
 # if Club.find_by(name: "RasenBallsport Leipzig")
 #   Club.find_by(name: "RasenBallsport Leipzig").update!(name: "RB Leipzig")
 # else
 #   Club.find_by(name: "RB Leipzig").update!(name: "RasenBallsport Leipzig")
 # end
 
-# Updating Day 1
+matchdays = Matchday.all.pluck(:id).sort
 
-Game.find(4).update!(home_score: 3, away_score: 1)
-Game.find(5).update!(home_score: 0, away_score: 3)
-Game.find(6).update!(home_score: 9, away_score: 2)
-Game.find(7).update!(home_score: 1, away_score: 3)
-Game.find(8).update!(home_score: 2, away_score: 0)
-Game.find(9).update!(home_score: 3, away_score: 1)
-# Game.find(10).update!(home_score: 1, away_score: 1)
-# Game.find(11).update!(home_score: 1, away_score: 1)
-# Game.find(12).update!(home_score: 1, away_score: 1)
-# Game.find(13).update!(home_score: 1, away_score: 1)
-# Game.find(14).update!(home_score: 1, away_score: 1)
-# Game.find(15).update!(home_score: 1, away_score: 1)
-# Game.find(16).update!(home_score: 1, away_score: 1)
-# Game.find(17).update!(home_score: 1, away_score: 1)
-# Game.find(18).update!(home_score: 1, away_score: 1)
-# Game.find(19).update!(home_score: 1, away_score: 1)
-# Game.find(20).update!(home_score: 1, away_score: 1)
-# Game.find(21).update!(home_score: 1, away_score: 1)
-# Game.find(22).update!(home_score: 1, away_score: 1)
+# Updating Day 1
+m1 = Matchday.find(matchdays[0])
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "Juventus")).update!(home_score: 3, away_score: 1)
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "Young Boys")).update!(home_score: 0, away_score: 3)
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "Bayern Munich")).update!(home_score: 9, away_score: 2)
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "AC Milan")).update!(home_score: 1, away_score: 3)
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "Sporting CP")).update!(home_score: 2, away_score: 0)
+Game.find_by(matchday: m1, home_team: Club.find_by(name: "Real Madrid")).update!(home_score: 3, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Bologna")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Sparta Prague")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Club Brugge")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Manchester City")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Paris Saint Germain")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Celtic")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Feyenoord")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "FK Crvena Zvezda")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Atalanta")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Atletico Madrid")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Brest")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m1, home_team: Club.find_by(name: "Monaco")).update!(home_score: 1, away_score: 1)
+
+
+# # Updating Day 2
+
+# m2 = Matchday.find(matchdays[1])
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Salzburg")).update!(home_score: 3, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "VfB Stuttgart")).update!(home_score: 0, away_score: 3)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Barcelona")).update!(home_score: 9, away_score: 2)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Borussia Dortmund")).update!(home_score: 1, away_score: 3)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Inter")).update!(home_score: 2, away_score: 0)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "PSV Eindhoven")).update!(home_score: 3, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Slovan Bratislava")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Arsenal")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Bayer Leverkusen")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Shakhtar Donetsk")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Girona")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Dinamo Zagreb")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Lille")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Liverpool")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "RB Leipzig")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Sturm Graz")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Benfica")).update!(home_score: 1, away_score: 1)
+# Game.find_by(matchday: m2, home_team: Club.find_by(name: "Aston Villa")).update!(home_score: 1, away_score: 1)
+
+
+# # Updating Day 3
+#
+#
+#
+# # Updating Day 4
+#
+#
+#
+# # Updating Day 5
+#
+#
+#
+# # Updating Day 6
+#
+#
+#
+# # Updating Day 7
+#
+#
+#
+# # Updating Day 8
+#
+#
+#
