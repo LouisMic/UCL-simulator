@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_153039) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_084541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_153039) do
     t.float "coeff_full"
     t.float "coeff_last"
     t.string "country"
+    t.index ["coeff_full"], name: "index_clubs_on_coeff_full"
+    t.index ["coeff_last"], name: "index_clubs_on_coeff_last"
+    t.index ["country"], name: "index_clubs_on_country"
+    t.index ["points"], name: "index_clubs_on_points"
   end
 
   create_table "games", force: :cascade do |t|
@@ -38,6 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_153039) do
     t.datetime "updated_at", null: false
     t.datetime "gametime"
     t.index ["away_team_id"], name: "index_games_on_away_team_id"
+    t.index ["gametime"], name: "index_games_on_gametime"
+    t.index ["home_team_id", "away_team_id"], name: "index_games_on_home_team_id_and_away_team_id"
     t.index ["home_team_id"], name: "index_games_on_home_team_id"
     t.index ["matchday_id"], name: "index_games_on_matchday_id"
   end
@@ -57,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_153039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_predictions_on_game_id"
+    t.index ["user_id", "game_id"], name: "index_predictions_on_user_id_and_game_id", unique: true
     t.index ["user_id"], name: "index_predictions_on_user_id"
   end
 

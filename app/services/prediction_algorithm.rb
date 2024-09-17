@@ -14,6 +14,7 @@ class PredictionAlgorithm
     end
 
     Prediction.import(predictions_to_update, on_duplicate_key_update: [:home_score, :away_score])
+    predictions_to_update.each(&:update_rankings)
   end
 
   def team_strength(team)
