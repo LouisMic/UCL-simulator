@@ -28,7 +28,6 @@ module UclSimulator
     # in config/environments, which are processed later.
     #
     config.time_zone = "UTC"
-    config.assets.enabled = false
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
