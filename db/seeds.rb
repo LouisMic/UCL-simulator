@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'json'
 
+
 # # Destroying all clubs and fixtures
 # Game.destroy_all
 # Matchday.destroy_all
@@ -16,10 +17,12 @@ require 'json'
 # Matchday.create!(start_date: "2025-01-21", end_date: "2025-01-22")
 # Matchday.create!(start_date: "2025-01-29", end_date: "2025-01-29")
 
+
+
 # puts "Created #{Matchday.all.size} matchdays (should be 8)"
 
 
-# # Creating all clubs and fixtures
+## Creating all clubs and fixtures
 # page1 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=1"
 # page2 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=2"
 # page3 = "https://livescore-api.com/api-client/fixtures/matches.json?key=#{ENV['key']}&secret=#{ENV['secret']}&competition_id=244&package_id=4&page=3"
@@ -29,17 +32,17 @@ require 'json'
 
 
 # all_urls.each do |url|
-#   response = RestClient.get(url)
-#   fixtures = JSON.parse(response)["data"]["fixtures"]
+  # response = RestClient.get(url)
+  # fixtures = JSON.parse(response)["data"]["fixtures"]
 
-#   fixtures.each do |fixture|
-#     home = Club.find_or_create_by(name: fixture["home_name"])
-#     away = Club.find_or_create_by(name: fixture["away_name"])
-#     matchday = Matchday.all[fixture["round"].to_i - 1]
-#     time = "#{fixture["date"]} #{fixture["time"]}"
-#     date = DateTime.parse(time)
-#     Game.create!(matchday: matchday, home_team: home, away_team: away, gametime: date)
-#   end
+  # fixtures.each do |fixture|
+    # home = Club.find_or_create_by(name: fixture["home_name"])
+    # away = Club.find_or_create_by(name: fixture["away_name"])
+    # matchday = Matchday.all[fixture["round"].to_i - 1]
+    # time = "#{fixture["date"]} #{fixture["time"]}"
+    # date = DateTime.parse(time)
+    # Game.create!(matchday: matchday, home_team: home, away_team: away, gametime: date)
+  # end
 # end
 
 # puts "Created #{Club.all.size} clubs (should be 36)"
