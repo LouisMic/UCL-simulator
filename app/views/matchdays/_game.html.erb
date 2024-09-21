@@ -6,9 +6,18 @@
         <%= image_tag game.home_team.logo, width: 70, class: "max-h-20" %>
         <%= ff.label :home_score, game.home_team.name, class: "pb-3 text-wrap text-center" %>
       </div>
-      <%= ff.input :home_score, as: :string, label: false, input_html: { class: "w-12 bg-uclbluedark text-white border-uclbluelight rounded-lg text-center text-xl", data: {action: "change->update-rankings#update"} } %>
+      <% if game.home_score && game.away_score %>
+        <div class="w-12 bg-uclblue text-white text-center text-xl">
+          <%= game.home_score %>
+        </div>
+        <div class="w-12 bg-uclblue text-white text-center text-xl">
+          <%= game.away_score %>
+        </div>
+      <% else %>
+        <%= ff.input :home_score, as: :string, label: false, input_html: { class: "w-12 bg-uclbluedark text-white border-uclbluelight rounded-lg text-center text-xl", data: {action: "change->update-rankings#update"} } %>
 
-      <%= ff.input :away_score, as: :string, label: false, input_html: { class: "w-12 bg-uclbluedark text-white border-uclbluelight rounded-lg text-center text-xl", data: {action: "change->update-rankings#update"} } %>
+        <%= ff.input :away_score, as: :string, label: false, input_html: { class: "w-12 bg-uclbluedark text-white border-uclbluelight rounded-lg text-center text-xl", data: {action: "change->update-rankings#update"} } %>
+      <% end %>
       <div class="team flex flex-col-reverse items-center justify-center">
         <%= image_tag game.away_team.logo, width: 70, class: "max-h-20" %>
         <%= ff.label :away_score, game.away_team.name, class: "pb-3 text-wrap text-center" %>
