@@ -7,7 +7,7 @@
       </div>
       <div class="homebutton px-5 py-3 text-base font-medium text-center inline-flex items-center justify-center w-full sm:w-auto text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-2">
         <i class="fa-solid fa-forward-fast mr-2"></i>
-        <%= form_with url: algo_user_path(@user), method: :patch, local: true, class: "w-full text-center" do %>
+        <%= form_with url: algo_user_path(@user), method: :patch, class: "w-full text-center", data: { controller: "spinner", action: "submit->spinner#show" } do %>
           <%= submit_tag "Simulate all games", class: "cursor-pointer" %>
         <% end %>
       </div>
